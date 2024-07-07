@@ -27,20 +27,23 @@ Welcome to Homing.com! This project is designed to provide a comprehensive solut
 To get started with Homing.com, follow these steps:
 
 1. Clone the repository:
-   git clone https://github.com/your-repo/homing.com.git
-   cd homing.com
+   git clone https://github.com/Vidhnavyrs/homingdotcom.com.git
+   cd homingdotcom
 2. Install the dependencies:
    npm install
 3. Set up your environment variables:
    cp .env.example .env
 4. Run the backend:
    you can use nodemon or console-ninja to do so
+   use: console-ninja --watch node app.js
+   or
+   use: nodemon app.js
 5. Run the Frontend:
-   npm start
+   npm run dev
 
 ## Usage
 
-Once the application is running, you can access it in your web browser at http://localhost:3000. You can register a new account, browse property listings, save your favorites, and chat with other users.
+Once the application is running(both backend and fromtend), you can access it in your web browser at http://localhost:5173. You can register a new account, browse property listings, save your favorites, and chat with other users.
 
 ## Architecture
 
@@ -56,7 +59,7 @@ Homing.com is built using the following technologies:
 
 ## Contributing
 
-This project is a group collaboration with ![Vineet](https://github.com/dxfuryman).
+This project is a group collaboration with [Vineet](https://github.com/dxfuryman).
 Contributions are welcome! Please follow these steps to contribute:
 
 - Fork the repository.
