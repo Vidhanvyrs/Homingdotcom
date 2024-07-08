@@ -43,7 +43,7 @@ To get started with Homing.com, follow these steps:
 
 ## Usage
 
-Once the application is running(both backend and fromtend), you can access it in your web browser at http://localhost:5173. You can register a new account, browse property listings, save your favorites, and chat with other users.
+Once the application is running(both backend and frontend), you can access it in your web browser at http://localhost:5173. You can register a new account, browse property listings, save your favorites, and chat with other users.
 
 ## Architecture
 
