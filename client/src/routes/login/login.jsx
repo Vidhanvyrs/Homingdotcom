@@ -1,13 +1,17 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import "./login.scss";
 import { Link, useNavigate } from "react-router-dom";
 import apiRequest from "../../lib/apiRequest";
+import { AuthContext } from "../../context/AuthContext.jsx";
 
 function Login() {
   //for showing error
   const [error, setError] = useState("");
   //disble the login button until request gets a response
   const [isLoading, setIsLoading] = useState(false);
+
+  const { updateUser } = useContext(AuthContext);
+
   //as soon as user registers itself route them to login page
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
@@ -33,7 +37,11 @@ function Login() {
 
       // console.log(res.data);
       //now as we got our userinfo from the server we will store it in LocalStorage to use it for our profile page
-      localStorage.setItem("user", JSON.stringify(res.data));
+      // localStorage.setItem("user", JSON.stringify(res.data));
+
+      //here we are taking care of localStorage in our context
+      updateUser(res.data);
+      
       navigate("/");
     } catch (error) {
       // console.log(err);
