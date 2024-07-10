@@ -9,9 +9,17 @@ import { AuthContext } from "../../context/AuthContext";
 function ProfilePage() {
   //when the user is updated show new info
   const { updateUser, currentUser } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  //protected routes
+  // useEffect(() => {
+  //   if (!currentUser) {
+  //     navigate("/login");
+  //   }
+  // }, [currentUser, navigate]);
+  //we handled it by making a protected layout and updating the app.jsx
 
   //we here going to handle the logout functionality
-  const navigate = useNavigate();
   const handleLogout = async () => {
     try {
       await apiRequest.post("/auth/logout");
