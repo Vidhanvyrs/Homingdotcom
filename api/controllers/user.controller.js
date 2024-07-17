@@ -1,0 +1,82 @@
+import prisma from "../lib/prisma.js";
+import bcrypt from "bcrypt";
+
+export const getUsers = async (req, res) => {
+  console.log("it works");
+  //we gonna fetch the user data from the database
+  try {
+    //using prisma to find my user as we are using prisma as our ORM
+    const users = await prisma.user.findMany();
+    res.status(200).json(users);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: "Failed to update users!" });
+  }
+};
+
+export const getUser = async (req, res) => {
+  //getting the unique id that we added in our user.route.js
+  const id = req.params.id;
+  try {
+    //gonna find an unique user
+    const user = await prisma.user.findUnique({
+      where: { id },
+    });
+    res.status(200).json(user);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: "Failed to update users!" });
+  }
+};
+
+export const updateUser = async (req, res) => {
+  //again getting the id through params
+  const id = req.params.id;
+  //here one extra check is done by verifying the tokenuserid with the id inorder to do the updation
+  const tokenUserId = req.userId; //go check in verifyToken.js
+  const { password, avatar, ...inputs } = req.body; //we are getting body inorder to change it and send it back to the db
+  if (id !== tokenUserId) {
+    //this is the check
+    return res.status(403).json({ message: "Not Authorized!!" });
+  }
+  let updatedPassword = null;
+  try {
+    //hashing the passkey
+    if (password) {
+      updatedPassword = await bcrypt.hash(password, 10);
+    }
+
+    //this is how we gonna do the updation
+    const updatedUser = await prisma.user.update({
+      where: { id },
+      data: {
+        ...inputs,
+        ...(updatedPassword && { password: updatedPassword }), //this is how you can write in a condition using spread operator
+        ...(avatar && { avatar }), //same thing can be done for avatar if new avatar is there then add it else not
+      },
+    });
+    const { password: userPassword, ...rest } = updatedUser;
+    // res.status(200).json(updatedUser);//no need to send the whole data as we do not want to send those which are not updated
+    res.status(200).json(rest);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: "Failed to update users!" });
+  }
+};
+
+export const deleteUser = async (req, res) => {
+  const id = req.params.id;
+  const tokenUserId = req.userId;
+  if (id !== tokenUserId) {
+    return res.status(403).json({ message: "Not Authorized!!" });
+  }
+  try {
+    await prisma.user.delete({
+      where: { id },
+    });
+    res.status(200).json({ message: "User deleted" });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: "Failed to update users!" });
+  }
+};
