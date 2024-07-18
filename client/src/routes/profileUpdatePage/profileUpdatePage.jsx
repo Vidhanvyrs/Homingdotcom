@@ -3,9 +3,11 @@ import "./profileUpdatePage.scss";
 import { AuthContext } from "../../context/AuthContext";
 import apiRequest from "../../lib/apiRequest";
 import { useNavigate } from "react-router-dom";
+import UploadWidget from "../../components/uploadWidget/UploadWidget";
 function ProfileUpdatePage() {
-  const [error, setError] = useState("");
   const { currentUser, updateUser } = useContext(AuthContext);
+  const [error, setError] = useState("");
+  const [avatar, setAvatar] = useState(currentUser.avatar);
   const navigate = useNavigate();
   //updation submit function
   const handleSubmit = async (e) => {
@@ -17,6 +19,7 @@ function ProfileUpdatePage() {
         username,
         email,
         password,
+        avatar,
       });
       // console.log(res.data);
       updateUser(res.data);
@@ -60,11 +63,21 @@ function ProfileUpdatePage() {
       <div className="sideContainer">
         <img
           src={
-            currentUser.avatar ||
+            avatar ||
             "https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
           }
           alt=""
           className="avatar"
+        />
+        <UploadWidget
+          uwConfig={{
+            cloudName: "drmuikysq",
+            uploadPreset: "homingdotcom",
+            multiple: false,
+            maxImageFileSize: 2000000,
+            folder: "avatars",
+          }}
+          setAvatar={setAvatar}
         />
       </div>
     </div>
