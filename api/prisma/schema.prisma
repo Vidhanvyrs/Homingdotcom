@@ -21,4 +21,39 @@ model User {
   password String 
   avatar String? 
   createdAt DateTime @default(now())
+  posts Post[]//one user may have many posts
 }
+
+model Post {
+  //now its time for posts 
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  title String
+  price Int
+  img String
+  address String 
+  city String 
+  bedroom Int 
+  bathroom Int
+  latitude String 
+  longitude String
+  type Type
+  property Property
+  createdAt DateTime @default(now())
+  //each post has a user 
+  user User @relation(fields: [userId], references: [id])//giving user here and connecting both of em using ids of em
+  userId String @db.ObjectId//connecting through id 
+}
+
+//its used to restrict as we want role based entries 
+enum Type {
+  buy
+  rent
+}
+enum Property {
+  apartment 
+  house
+  condo 
+  land
+}
+//always after modifying something in you schema run the command
+//npx prisma db push
