@@ -15,7 +15,9 @@ datasource db {
 
 model User {
   //connecting our mongodb id to the id which we initializes
-  id String @id @default(auto()) @map("_id") @db.ObjectId
+  id String @id @default(auto()) @map("_id") @db.ObjectId//id datatype primarykey generatingavalue mongodbmapping treatementasmongodbobjectId
+  //@default(auto())  sets a default value for the field. auto() means Prisma will automatically generate a value if none is provided.
+  //in monogodb the id is named _id hence we are mapping it using @map("_id")
   email String @unique
   username String @unique
   password String 
@@ -29,7 +31,7 @@ model Post {
   id String @id @default(auto()) @map("_id") @db.ObjectId
   title String
   price Int
-  img String
+  images String[]
   address String 
   city String 
   bedroom Int 
@@ -42,6 +44,7 @@ model Post {
   //each post has a user 
   user User @relation(fields: [userId], references: [id])//giving user here and connecting both of em using ids of em
   userId String @db.ObjectId//connecting through id 
+  postDetail PostDetail?//connecting with post
 }
 
 //its used to restrict as we want role based entries 
@@ -54,6 +57,20 @@ enum Property {
   house
   condo 
   land
+}
+//now we are going to make the model for the details page of each posts
+model PostDetail{
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  desc String
+  utilities String?
+  pet String?
+  income String?
+  size Int?
+  school Int?
+  bus Int?
+  restaurant Int?
+  post Post @relation(fields: [postId], references: [id])//if a post is created then post detail is also created
+  postId String @db.ObjectId @unique
 }
 //always after modifying something in you schema run the command
 //npx prisma db push

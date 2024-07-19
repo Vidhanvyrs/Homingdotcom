@@ -58,8 +58,6 @@ Homing.com is built using the following technologies:
   ![architecture](architecture.png)
 
 ## Contributing
-
-This project is a group collaboration with [Vineet](https://github.com/dxfuryman).
 Contributions are welcome! Please follow these steps to contribute:
 
 - Fork the repository.

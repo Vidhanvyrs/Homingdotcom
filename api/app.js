@@ -24,6 +24,7 @@ app.use("/api/auth", authRoute);
 app.use("/api/users", userRoute);
 
 //go to /api/posts/test
+//gonna start making this work
 app.use("/api/posts", postRoute);
 
 //using this for testing routes
