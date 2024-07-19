@@ -1,6 +1,11 @@
+import { useState } from "react";
 import "./newPostPage.scss";
+import RectQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 
 function NewPostPage() {
+  //anything written in the editor needed to be stored so we'll make a useState
+  const [value, setValue] = useState("");
   return (
     <div className="newPostPage">
       <div className="formContainer">
@@ -21,6 +26,8 @@ function NewPostPage() {
             </div>
             <div className="item description">
               <label htmlFor="desc">Description</label>
+              <RectQuill theme="snow" onChange={setValue} value={value} />
+              {/* only adding this won't budge instead css file should also be added */}
             </div>
             <div className="item">
               <label htmlFor="city">City</label>
