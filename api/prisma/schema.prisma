@@ -24,6 +24,8 @@ model User {
   avatar String? 
   createdAt DateTime @default(now())
   posts Post[]//one user may have many posts
+  savedPost SavedPost[]// user can have multiple save posts
+
 }
 
 model Post {
@@ -45,6 +47,7 @@ model Post {
   user User @relation(fields: [userId], references: [id])//giving user here and connecting both of em using ids of em
   userId String @db.ObjectId//connecting through id 
   postDetail PostDetail?//connecting with post
+  savedPost SavedPost[]// post can have multiple save posts
 }
 
 //its used to restrict as we want role based entries 
@@ -72,5 +75,19 @@ model PostDetail{
   post Post @relation(fields: [postId], references: [id])//if a post is created then post detail is also created
   postId String @db.ObjectId @unique
 }
+
+//save post model
+model SavedPost {
+   id String @id @default(auto()) @map("_id") @db.ObjectId
+   user User @relation(fields: [userId], references: [id])
+   post Post @relation(fields: [postId], references: [id])
+   userId String @db.ObjectId @unique
+   postId String @db.ObjectId @unique
+   createdAt DateTime @default(now())
+
+   @@unique([userId, postId])  //we cannot create same save post for exactly the same user again and again
+   
+}
+
 //always after modifying something in you schema run the command
 //npx prisma db push

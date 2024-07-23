@@ -27,7 +27,8 @@
   }
 
   form {
-    border: 1px solid #999;
+    border: 1px solid #000000;
+    border-radius: 5px;
     display: flex;
     justify-content: space-between;
     height: 64px;
@@ -71,14 +72,16 @@
     }
     a {
       flex: 1;
-      background-color: #fece51;
+      background-color: #feb651;
       display: flex;
       align-items: center;
       justify-content: center;
+      border-radius: 5px;
       button {
         border: none;
         cursor: pointer;
-        background-color: #fece51;
+        background-color: #feb651;
+        border-radius: 5px;
 
         @include sm {
           padding: 10px;

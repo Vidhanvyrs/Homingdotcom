@@ -32,7 +32,9 @@ nav {
       gap: 10px;
 
       img {
-        width: 28px;
+        width: 35px;
+        border: none;
+        border-radius: 5px;
       }
 
       span {
@@ -84,9 +86,10 @@ nav {
 
       .profile {
         padding: 12px 24px;
-        background-color: #fece51;
+        background-color: #feb651;
         cursor: pointer;
         border: none;
+        border-radius: 10px;
         position: relative;
 
         .notification {
@@ -106,7 +109,7 @@ nav {
     }
 
     .register2 {
-      background-color: #fece51;
+      background-color: #feb651;
       height: 50%;
     }
 
