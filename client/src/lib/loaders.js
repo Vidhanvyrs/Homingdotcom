@@ -18,3 +18,11 @@ export const listPageLoader = async ({ request, params }) => {
   // const res = await apiRequest("/posts/" + params.id);
   // return res.data;
 };
+
+//profile page loader
+export const profilePageLoader = async () => {
+  const postPromise = await apiRequest("/users/profilePosts");
+  return defer({
+    postResponse: postPromise, //our post response which we are sending to show it in frontend
+  });
+};

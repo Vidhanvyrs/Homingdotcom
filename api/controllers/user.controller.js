@@ -99,7 +99,7 @@ export const savePost = async (req, res) => {
     if (savedPost) {
       await prisma.savedPost.delete({
         where: {
-          id: savePost.id,
+          id: savedPost.id,
         },
       });
       res.status(200).json({ message: "Post Unsaved!" });
@@ -115,5 +115,31 @@ export const savePost = async (req, res) => {
   } catch (err) {
     console.log(err);
     res.status(500).json({ message: "Failed!" });
+  }
+};
+
+export const profilePosts = async (req, res) => {
+  //getting the userid from the url
+  const tokenUserId = req.params.id;
+  try {
+    //fetching the posts from the database {myList}
+    const userPosts = await prisma.post.findMany({
+      where: {
+        userId: tokenUserId,
+      },
+    });
+    const saved = await prisma.savedPost.findMany({
+      where: {
+        userId: tokenUserId,
+      },
+      include: {
+        post: true,
+      },
+    });
+    const savedPosts = saved.map((item) => item.post);
+    res.status(200).json({ userPosts, savedPosts });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: "Failed to update profile posts!" });
   }
 };
