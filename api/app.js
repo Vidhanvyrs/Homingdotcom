@@ -6,6 +6,8 @@ import postRoute from "./routes/post.route.js";
 import authRoute from "./routes/auth.route.js";
 import testRoute from "./routes/test.route.js";
 import userRoute from "./routes/user.route.js";
+import chatRoute from "./routes/chat.route.js";
+import messageRoute from "./routes/message.route.js";
 
 dotenv.config();
 const app = express();
@@ -29,6 +31,12 @@ app.use("/api/posts", postRoute);
 
 //using this for testing routes
 app.use("/api/test", testRoute);
+
+//using this for chat
+app.use("/api/chats", chatRoute);
+
+//using this for message
+app.use("/api/messages", messageRoute)
 
 
 

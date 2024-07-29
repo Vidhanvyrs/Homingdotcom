@@ -1,48 +1,28 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client-js"
+  provider = "prisma-client-js" // Specifies to use the JavaScript client for Prisma
 }
 
 datasource db {
-  provider = "mongodb"
-  url      = env("DATABASE_URL")
-}
-
-model User {
-  //connecting our mongodb id to the id which we initializes
-  id String @id @default(auto()) @map("_id") @db.ObjectId//id datatype primarykey generatingavalue mongodbmapping treatementasmongodbobjectId
-  //@default(auto())  sets a default value for the field. auto() means Prisma will automatically generate a value if none is provided.
-  //in monogodb the id is named _id hence we are mapping it using @map("_id")
-  email String @unique
-  username String @unique
-  password String 
-  avatar String? 
-  createdAt DateTime @default(now())
-  posts Post[]//one user may have many posts
-  savedPost SavedPost[]// user can have multiple save posts
-
+  provider = "mongodb" // Sets MongoDB as the database provider
+  url      = env("DATABASE_URL") // Uses the DATABASE_URL environment variable for connection
 }
 
 model Post {
   //now its time for posts 
-  id String @id @default(auto()) @map("_id") @db.ObjectId
-  title String
-  price Int
-  images String[]
-  address String 
-  city String 
-  bedroom Int 
-  bathroom Int
-  latitude String 
-  longitude String
-  type Type
-  property Property
-  createdAt DateTime @default(now())
+  id String @id @default(auto()) @map("_id") @db.ObjectId // Defines the primary key, auto-generated, mapped to MongoDB's _id field
+  title String // Post title field
+  price Int // Price of the post item
+  images String[] // Array of image URLs
+  address String // Address of the property
+  city String // City of the property
+  bedroom Int // Number of bedrooms
+  bathroom Int // Number of bathrooms
+  latitude String // Latitude coordinate
+  longitude String // Longitude coordinate
+  type Type // Type of post (buy or rent)
+  property Property // Type of property
+  createdAt DateTime @default(now()) // Timestamp of post creation
   //each post has a user 
   user User @relation(fields: [userId], references: [id])//giving user here and connecting both of em using ids of em
   userId String @db.ObjectId//connecting through id 
@@ -52,41 +32,77 @@ model Post {
 
 //its used to restrict as we want role based entries 
 enum Type {
-  buy
-  rent
+  buy // Indicates the property is for sale
+  rent // Indicates the property is for rent
 }
 enum Property {
-  apartment 
-  house
-  condo 
-  land
+  apartment // Apartment type property
+  house // House type property
+  condo // Condominium type property
+  land // Land type property
 }
 //now we are going to make the model for the details page of each posts
 model PostDetail{
-  id String @id @default(auto()) @map("_id") @db.ObjectId
-  desc String
-  utilities String?
-  pet String?
-  income String?
-  size Int?
-  school Int?
-  bus Int?
-  restaurant Int?
+  id String @id @default(auto()) @map("_id") @db.ObjectId // Primary key for PostDetail
+  desc String // Description of the property
+  utilities String? // Optional utilities information
+  pet String? // Optional pet policy
+  income String? // Optional income requirements
+  size Int? // Optional property size
+  school Int? // Optional number of schools nearby
+  bus Int? // Optional number of bus stops nearby
+  restaurant Int? // Optional number of restaurants nearby
   post Post @relation(fields: [postId], references: [id])//if a post is created then post detail is also created
-  postId String @db.ObjectId @unique
+  postId String @db.ObjectId @unique // Unique foreign key to Post
 }
 
 //save post model
 model SavedPost {
-   id String @id @default(auto()) @map("_id") @db.ObjectId
-   user User @relation(fields: [userId], references: [id])
-   post Post @relation(fields: [postId], references: [id])
-   userId String @db.ObjectId @unique
-   postId String @db.ObjectId @unique
-   createdAt DateTime @default(now())
+   id String @id @default(auto()) @map("_id") @db.ObjectId // Primary key for SavedPost
+   user User @relation(fields: [userId], references: [id]) // Relation to User model
+   post Post @relation(fields: [postId], references: [id]) // Relation to Post model
+   userId String @db.ObjectId @unique // Foreign key to User
+   postId String @db.ObjectId @unique // Foreign key to Post
+   createdAt DateTime @default(now()) // Timestamp of when the post was saved
 
    @@unique([userId, postId])  //we cannot create same save post for exactly the same user again and again
-   
+}
+
+model User {
+  //connecting our mongodb id to the id which we initializes
+  id String @id @default(auto()) @map("_id") @db.ObjectId//id datatype primarykey generatingavalue mongodbmapping treatementasmongodbobjectId
+  //@default(auto())  sets a default value for the field. auto() means Prisma will automatically generate a value if none is provided.
+  //in monogodb the id is named _id hence we are mapping it using @map("_id")
+  email String @unique // Unique email for each user
+  username String @unique // Unique username for each user
+  password String // User's password
+  avatar String? // Optional avatar URL
+  createdAt DateTime @default(now()) // Timestamp of user creation
+  posts Post[]//one user may have many posts
+  savedPost SavedPost[]// user can have multiple save posts
+  chats Chat[] @relation(fields: [chatIDs], references: [id])//many to many
+  //we cannot normall write Chat[] like this and can make many to may relation
+  //as mongodb do not work with prisma like this 
+  chatIDs String[] @db.ObjectId //we need to connect the IDs also 
+}
+
+model Chat {
+  id String @id @default(auto()) @map("_id") @db.ObjectId // Primary key for Chat
+  user User[] @relation(fields: [userIDs], references: [id])//searching for userids by taking reference with the id of the user in the db
+  userIDs String[] @db.ObjectId // Array of User IDs involved in the chat
+  createdAt DateTime @default(now()) // Timestamp of chat creation
+  seenBy String[] @db.ObjectId // Array of User IDs who have seen the chat
+  messages Message[] // Relation to Message model
+  lastMessage String? // Optional field for the last message in the chat
+}
+
+model Message {
+   id String @id @default(auto()) @map("_id") @db.ObjectId // Primary key for Message
+   text String // Content of the message
+   userId String // ID of the user who sent the message
+   chat Chat @relation(fields: [chatId], references: [id]) // Relation to Chat model
+   chatId String @db.ObjectId // Foreign key to Chat
+   createdAt DateTime @default(now()) // Timestamp of message creation
 }
 
 //always after modifying something in you schema run the command
