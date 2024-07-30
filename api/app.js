@@ -36,10 +36,8 @@ app.use("/api/test", testRoute);
 app.use("/api/chats", chatRoute);
 
 //using this for message
-app.use("/api/messages", messageRoute)
+app.use("/api/messages", messageRoute);
 
-
-
-app.listen(8800, () => {
+app.listen(process.env.PORT, () => {
   console.log("Server is running");
 });

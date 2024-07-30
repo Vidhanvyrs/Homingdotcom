@@ -1,8 +1,10 @@
 import { useState } from "react";
 import "./chat.scss";
 
-function Chat() {
+function Chat({ chats }) {
   const [chat, setChat] = useState(true);
+  console.log(chats);
+  //we need to get our user information to show it in the chat app
   return (
     <div className="chat">
       <div className="messages">
@@ -66,7 +68,9 @@ function Chat() {
               />
               John Doe
             </div>
-            <span className="close" onClick={()=>setChat(null)}>X</span>
+            <span className="close" onClick={() => setChat(null)}>
+              X
+            </span>
           </div>
           <div className="center">
             <div className="chatMessage">

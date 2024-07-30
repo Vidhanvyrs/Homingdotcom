@@ -10,6 +10,23 @@ export const getChats = async (req, res) => {
         },
       },
     });
+    //for getting the data of our users
+    // for (const chat of chats) {
+    //   const receiverId = chat.userIDs.find((id) => id !== tokenUserId); //getting other user by conditionally checking for our id which should not be there
+
+    //   const receiver = await prisma.user.findUnique({
+    //     //fetching other user information
+    //     where: {
+    //       id: receiverId,
+    //     },
+    //     select: {
+    //       id: true,
+    //       username: true, //getting username
+    //       avatar: true, //getting avatar
+    //     },
+    //   });
+    //   chat.receiver = receiver;
+    // }
 
     res.status(200).json(chats);
   } catch (err) {
@@ -46,7 +63,7 @@ export const getChat = async (req, res) => {
       },
       data: {
         seenBy: {
-          set: [tokenUserId],
+          push: [tokenUserId],
         },
       },
     });
