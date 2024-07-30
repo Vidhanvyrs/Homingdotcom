@@ -22,9 +22,9 @@ export const listPageLoader = async ({ request, params }) => {
 //profile page loader
 export const profilePageLoader = async () => {
   const postPromise = await apiRequest("/users/profilePosts"); //fetching our posts
-  const chatPromise = await apiRequest("/chats");//fetching our chats
+  const chatPromise = await apiRequest("/chats"); //fetching our chats
   return defer({
     postResponse: postPromise, //our post response which we are sending to show it in frontend
-    chatResponse: chatPromise,//our chat response that we are sending 
+    chatResponse: chatPromise, //our chat response that we are sending
   });
 };
