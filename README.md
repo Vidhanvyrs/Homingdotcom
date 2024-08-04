@@ -1,5 +1,9 @@
 # Homing.com
 
+## Demo
+
+![demovid](https://utfs.io/f/504c3aca-3a9e-40ca-a30b-b6f2357a964f-1dk638.mp4)
+
 ## Table of Contents
 
 - [Introduction](#introduction)
@@ -58,6 +62,7 @@ Homing.com is built using the following technologies:
   ![architecture](architecture.png)
 
 ## Contributing
+
 Contributions are welcome! Please follow these steps to contribute:
 
 - Fork the repository.
