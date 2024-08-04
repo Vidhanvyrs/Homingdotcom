@@ -2,7 +2,7 @@
 
 ## Demo
 
-![demovid](https://utfs.io/f/504c3aca-3a9e-40ca-a30b-b6f2357a964f-1dk638.mp4)
+[Watch the demo video](https://utfs.io/f/504c3aca-3a9e-40ca-a30b-b6f2357a964f-1dk638.mp4)
 
 ## Table of Contents
 
