@@ -32,7 +32,7 @@ function Register() {
         { withCredentials: true }
       );
 
-      // console.log(res.data);
+      console.log(res.data);
       navigate("/login");
     } catch (error) {
       // console.log(err);

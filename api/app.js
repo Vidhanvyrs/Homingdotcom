@@ -11,7 +11,7 @@ import messageRoute from "./routes/message.route.js";
 
 dotenv.config();
 const app = express();
-const port = process.env.PORT || 8800;
+// const port = process.env.PORT || 8800;
 
 //adding cors because api cannot be used directly from the client
 app.use(cors({ origin: process.env.CLIENT_URL, credentials: true }));
@@ -39,6 +39,6 @@ app.use("/api/chats", chatRoute);
 //using this for message
 app.use("/api/messages", messageRoute);
 
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+app.listen(8800, () => {
+  console.log("Server is running on port 8800");
 });
