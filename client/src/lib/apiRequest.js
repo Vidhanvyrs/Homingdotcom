@@ -1,7 +1,6 @@
 import axios from "axios";
-axios.defaults.withCredentials = true;
 const apiRequest = axios.create({
-  baseURL: "https://homingdotcom-api.vercel.app/api",
+  baseURL: "http://localhost:8800/api",
   withCredentials: true,
 });
 
