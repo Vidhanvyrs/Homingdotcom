@@ -14,7 +14,13 @@ const app = express();
 // const port = process.env.PORT || 8800;
 
 //adding cors because api cannot be used directly from the client
-app.use(cors({ origin: process.env.CLIENT_URL, credentials: true }));
+app.use(
+  cors({
+    origin: ["http://localhost:5173"],
+    methods: ["POST", "GET"],
+    credentials: true,
+  })
+);
 // console.log("CLIENT_URL:", process.env.CLIENT_URL);
 
 app.use(express.json());
