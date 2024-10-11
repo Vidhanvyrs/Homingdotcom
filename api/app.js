@@ -16,7 +16,7 @@ const app = express();
 //adding cors because api cannot be used directly from the client
 app.use(
   cors({
-    origin: ["https://homingdotcom-frontend.vercel.app/"],
+    origin: ["https://homingdotcom-frontend.vercel.app"],
     methods: ["POST", "GET"],
     credentials: true,
   })
