@@ -58,8 +58,9 @@ Homing.com is built using the following technologies:
 - Node.js
 - Express
   Here's a high-level overview of the system architecture:
-  ![architecture](architecture.png)
+  ![image](https://github.com/user-attachments/assets/1efe489a-fe51-4aee-b9e3-4d424c110689)
 
+  
 ## Contributing
 
 Contributions are welcome! Please follow these steps to contribute:
