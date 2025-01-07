@@ -23,7 +23,6 @@ Welcome to Homing.com! This project is designed to provide a comprehensive solut
 - User registration and authentication
 - Posting and managing property listings
 - Saving favorite posts
-- Chatting with other user
 - Detailed property information
 
 ## Installation
@@ -71,6 +70,3 @@ Contributions are welcome! Please follow these steps to contribute:
 - Push your changes to your forked repository.
 - Create a pull request to the main repository.
 
-## License
-
-This project is licensed under the MIT License.
