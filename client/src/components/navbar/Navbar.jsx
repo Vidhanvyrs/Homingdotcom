@@ -31,10 +31,10 @@ function Navbar() {
               alt=""
             />
             <span>{currentUser.username}</span>
-            <Link to="/profile" className="profile">
-              <div className="notification">3</div>
+            <a href="/profile" className="profile">
+              {/* <div className="notification">3</div> */}
               <span>Profile</span>
-            </Link>
+            </a>
           </div>
         ) : (
           <>

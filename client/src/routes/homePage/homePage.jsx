@@ -12,10 +12,12 @@ function HomePage() {
         <div className="wrapper">
           <h1 className="title">Find Real Estate & Get Your Dream Place</h1>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos
-            explicabo suscipit cum eius, iure est nulla animi consequatur
-            facilis id pariatur fugit quos laudantium temporibus dolor ea
-            repellat provident impedit!
+            Discover your dream home with us! Our platform connects you with the
+            best properties, offering a seamless experience from browsing
+            listings to closing the deal. Whether you are buying, selling, or
+            renting, our user-friendly interface and real-time updates ensure
+            you stay ahead in the ever-changing real estate market. Start your
+            journey today!
           </p>
           <SearchBar />
           <div className="boxes">

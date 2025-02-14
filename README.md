@@ -39,7 +39,7 @@ To get started with Homing.com, follow these steps:
    cp .env.example .env
 4. Run the backend:
    you can use nodemon or console-ninja to do so
-   use: console-ninja --watch node app.js
+   use: console-ninja node --watch app.js
    or
    use: nodemon app.js
 5. Run the Frontend:
