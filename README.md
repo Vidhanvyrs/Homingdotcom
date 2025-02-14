@@ -23,7 +23,6 @@ Welcome to Homing.com! This project is designed to provide a comprehensive solut
 - User registration and authentication
 - Posting and managing property listings
 - Saving favorite posts
-- Chatting with other user
 - Detailed property information
 
 ## Installation
@@ -59,8 +58,9 @@ Homing.com is built using the following technologies:
 - Node.js
 - Express
   Here's a high-level overview of the system architecture:
-  ![architecture](architecture.png)
+  ![image](https://github.com/user-attachments/assets/1efe489a-fe51-4aee-b9e3-4d424c110689)
 
+  
 ## Contributing
 
 Contributions are welcome! Please follow these steps to contribute:
@@ -71,6 +71,3 @@ Contributions are welcome! Please follow these steps to contribute:
 - Push your changes to your forked repository.
 - Create a pull request to the main repository.
 
-## License
-
-This project is licensed under the MIT License.
